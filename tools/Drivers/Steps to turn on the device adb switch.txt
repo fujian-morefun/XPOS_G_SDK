@@ -1,0 +1,11 @@
+1、When the device is powered on, enter *#3333# in the standby interface.
+
+2、select the menu "setting".
+
+3、then "ADB Setting".
+
+4、then tell me CodeB:
+
+5、After entering the password, go to the adb set menu, then select Open and the device will automatically restart.
+
+6、Then re-plug the data cable and try adb again.
