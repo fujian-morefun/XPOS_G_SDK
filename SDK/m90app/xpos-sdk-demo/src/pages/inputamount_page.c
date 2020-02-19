@@ -18,7 +18,13 @@ static void _inputamount_PanitAll(char* title, int nAmount)
 	gui_begin_batch_paint();
 	gui_clear_dc();
 	gui_text_out(0,0, title);
-	gui_text_out(0, GUI_LINE_TOP(2), "Input the amount");	
+	if (strcmp(title , "CASHBACK") == 0){
+		gui_text_out(0, GUI_LINE_TOP(2), "Input Cashback amount");	
+	}
+	else{
+		gui_text_out(0, GUI_LINE_TOP(2), "Input the amount");	
+	}
+
 	_setAmount(nAmount);
 	gui_end_batch_paint();
 }

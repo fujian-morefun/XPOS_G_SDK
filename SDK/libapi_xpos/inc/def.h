@@ -676,7 +676,7 @@ typedef enum
 
 //2.2.11 EMV class API
 
-#define  UMAX_TERMINAL_APPL    21        //The maximum number of applications supported by card terminals
+#define  UMAX_TERMINAL_APPL    22        //The maximum number of applications supported by card terminals
 #define  UMAX_EXCEPTION_BIN_COUNT	100  //Card BIN blacklist maximum number
 
 //EMV parameter operation returns an enumeration

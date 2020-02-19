@@ -23,7 +23,7 @@ void showQrTest()
 
 
 	printf("showQrTest\r\n");
-	qr_info.moudleWidth = 8;		// gain
+	qr_info.moudleWidth = 1;		// gain
 	qr_info.nLevel = 1;				// Error correction level
 	qr_info.nVersion = 0;			// Qr version
 	
@@ -32,7 +32,7 @@ void showQrTest()
 	width = Util_GeneCodePic(data , strlen(data) , &qr_info , bitmap);
 
 	gui_post_message(GUI_GUIPAINT, 0 , 0);  // Send a paint message
-
+	gui_set_full_screen(1);
 	if(width > 0){
 
 		printf("width > 0\r\n");
@@ -48,11 +48,11 @@ void showQrTest()
 				if (pmsg.message_id == GUI_GUIPAINT) {			// 	If it is a paint message, draw the page	
 					gui_begin_batch_paint();
 					gui_clear_dc();
-					
+					zoom = (gui_get_height() - 10) / width;
 					// Calculate barcode position, centered display
 					left = (gui_get_width() - width * zoom)  / 2;	
 					top = (gui_get_height() - width * zoom) / 2;
-					gui_out_bits_ex(left, top ,(unsigned char *)bitmap , width , width , 0, 1);	
+					gui_out_bits_zoom(left, top,(unsigned char *)bitmap , width , width , 0, zoom);	
 					
 					
 					gui_end_batch_paint();
@@ -77,6 +77,7 @@ void showQrTest()
 
 	}
 	free(bitmap);
+	gui_set_full_screen(0);
 
 	return ;
 }

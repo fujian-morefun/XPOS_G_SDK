@@ -18,7 +18,6 @@ static char * hexdump( const char *buff, int len  ){
 };
 
 
-
 void rfid_mfcl_test(void)
 {
 	int rc;

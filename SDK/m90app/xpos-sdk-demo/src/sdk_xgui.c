@@ -7,7 +7,6 @@
 #include "libapi_xpos/inc/libapi_security.h"
 #include "libapi_xpos/inc/libapi_emv.h"
 
-#define APP_VER "V1.1.2"
 #define LOGOIMG "xxxx\\logo2.bmp"
 
 
@@ -28,17 +27,18 @@ static  const st_gui_menu_item_def _menu_def[] = {
 	{MAIN_MENU_PAGE ,	"Settings",		""},
 	{MAIN_MENU_PAGE ,	"Others",		""},
 
-	{"Test" ,	"Print",		""},
-	{"Test",	"Security",		""},
-	{"Test",	"Http",		    ""},
-	{"Test",	"Https",		""},
-	{"Test",	"ShowQr",		""},
-	{"Test",	"File",		    ""},
-    {"Test",    "Led",          ""},
-	{"Test",    "ShowString",          ""},
-	{"Test",    "TMSTest",      ""},
-	{"Test",    "M1 Test",      ""},
-
+	{"Test" ,		"Print",			""},
+	{"Test",		"Security",		""},
+	{"Test",		"Http",		    ""},
+	{"Test",		"Https",		""},
+	{"Test",		"ShowQr",		""},
+	{"Test",		"File",		    ""},
+   	{"Test",    	"Led",          ""},
+	{"Test",    	"ShowString",   ""},
+	{"Test",    	"TMSTest",      ""},
+	{"Test",    	"M1 Test",      ""},
+	{"Test",    	"Gui Color",      ""},
+	{"Test",    	"Sign Page",      ""},
 
 	{"Security",	"InitDukpt",	""},
 	{"Security",	"SetMainKey",	""},
@@ -119,15 +119,16 @@ static void ShowString()
 static int _menu_proc(char *pid)
 {
 	int ret;
-	char buff[20];
+	char buff[20]={0};
 	int pos = 0;
 	char msg[256];
+
 
 	 if (strcmp(pid , "Sale") == 0){
 		upay_consum();
 	}
 	else if (strcmp(pid , "Version") == 0){
-		sprintf(msg , "app:%s\r\n", APP_VER);
+		sprintf(msg , "app:%s\r\n", Sys_GetAppVer());
 		sprintf(msg + strlen(msg), "hardware:%s\r\n", sec_get_hw_ver());
 		sprintf(msg + strlen(msg), "fireware:%s\r\n", sec_get_fw_ver());
 		sprintf(msg + strlen(msg), "emv:%s\r\n", EMV_GetVersion());
@@ -160,9 +161,7 @@ static int _menu_proc(char *pid)
 	}
 	else if (strcmp(pid , "Https") == 0)	{
 		//test2();
-		sdk_https_test();
-
-		
+		sdk_https_test();		
 	}
 	else if (strcmp(pid , "ShowQr") == 0){
 		showQrTest();
@@ -171,8 +170,8 @@ static int _menu_proc(char *pid)
 		fileTest();
 	}
     else if(strcmp(pid, "Led") == 0){
-        sdk_driver_led();
-    }
+        	sdk_driver_led();
+   	}
 	else if (strcmp(pid, "Open Log") == 0){
 		//LogOutSet_Show();
 	}
@@ -191,10 +190,25 @@ static int _menu_proc(char *pid)
 	{
 		EMV_ShowCAPK_Prm();
 	}
+
 	else if (strcmp(pid, "M1 Test") == 0)
 	{
-		sdk_M1test();
+		//sdk_M1test();
 	}
+
+
+	else if (strcmp(pid, "Gui Color") == 0)
+	{
+		gui_titlecolorfore(0xFFFFFF);
+		gui_titlecolorback(0x0000FF);
+		gui_menuhightlinecolor(0x00EE00);
+	}	
+	else if (strcmp(pid, "Sign Page") == 0)
+	{
+		sign_page();
+	}
+
+	
 	return 0;
 }
 
@@ -212,6 +226,80 @@ void get_hhmmss_str(char *buff)
 	char d[32]={0};
 	Sys_GetDateTime(d);
 	sprintf(buff, "%c%c:%c%c:%c%c", d[8],d[9],d[10],d[11],d[12],d[13]);
+}
+
+
+#include "math.h"
+
+
+void draw_circle()
+{
+	int r = 50;
+	int x,y;
+	int ly = 0;
+	int top = 50;
+	int left = 100;
+	int i,count;
+	for(x = -r ; x <= r ; x ++){
+		y = sqrt(r * r - x * x);
+
+		if(y > ly){
+			i = ly;
+			count = y;
+		}
+		else{
+			i = y;
+			count = ly;
+		}
+
+		for(i; i <= count; i ++){
+			gui_pixel(left + x, top + i);
+			gui_pixel(left+ x, top - i);
+		}
+
+		ly = y;
+	}
+}
+
+void draw_ellipse()
+{	
+	int a = 50;
+	int b = 30;
+	int x,y;
+	int ly = 0;
+	int top = 110;
+	int left = 100;
+	int i,count;
+
+	for(x = -a ; x <= a ; x ++){
+		y = sqrt((1 - ((x * x * 1.0) / (a * a))) * (b * b));
+
+		if(y > ly){
+			i = ly;
+			count = y;
+		}
+		else{
+			i = y;
+			count = ly;
+		}
+
+		for(i; i <= count; i ++){
+			gui_pixel(left + x, top + i);
+			gui_pixel(left+ x, top - i);
+		}
+
+		ly = y;
+	}
+}
+
+
+void standby_pagepaint2()
+{
+	gui_begin_batch_paint();
+	gui_clear_dc();
+	draw_circle();
+	draw_ellipse();
+	gui_end_batch_paint();
 }
 
 
@@ -234,16 +322,40 @@ void standby_pagepaint()
 
 	if (pbmp != 0){
 		gui_out_bits(logoleft, logotop, pbmp , logowidth , logoheight, 0);
-		free(pbmp);
+		gui_bmp_free(pbmp);
 	}
+
 	
+	//gui_set_font(0);
+	//gui_set_font(1);
+	//gui_set_text_zoom(1);
+
+#if 1
 	get_yyyymmdd_str(data);	
 	gui_text_out((gui_get_width() - gui_get_text_width(data)) / 2, GUI_LINE_TOP(3), data);
+
+	
 	get_hhmmss_str(data);	
 	gui_text_out((gui_get_width() - gui_get_text_width(data)) / 2, GUI_LINE_TOP(4), data);
 
-	sprintf(data, "Version:%s", APP_VER);
+	sprintf(data, "Version:%s", Sys_GetAppVer()+9);
 	gui_text_out((gui_get_width() - gui_get_text_width(data)) / 2, GUI_LINE_TOP(5), data);
+#else
+	strcpy(data,"abc123");
+	gui_set_text_zoom(1);
+	gui_set_font(0);
+	gui_text_out(0, GUI_LINE_TOP(3), data);
+	gui_set_font(1);
+	gui_text_out(80, GUI_LINE_TOP(3), data);
+	gui_set_font(2);
+	gui_text_out(0, GUI_LINE_TOP(4), data);
+	gui_set_font(3);
+	gui_text_out(80, GUI_LINE_TOP(4), data);
+
+	gui_set_font(0);
+#endif	
+
+	
 
 	gui_end_batch_paint();
 }
@@ -256,7 +368,9 @@ void sdk_main_page()
 	char time_cur[20];
 	char time_last[20];
 	int i;
-
+#ifdef WIN32
+	sign_page();
+#endif
 
 	if(xgui_init_flag == 0){
 		xgui_init_flag = 1;
@@ -269,6 +383,16 @@ void sdk_main_page()
 	gui_post_message(GUI_GUIPAINT, 0 , 0);
 
 	while(1){
+
+		/*
+		if( mf_power_ac_online()==1){ // Disable screen off when external power is available
+			setbacklightflag(0);
+		}
+		else{
+			setbacklightflag(1);
+		}*/
+
+
 		if (gui_get_message(&pmsg, 300) == 0) {
 
 			if (pmsg.message_id == GUI_GUIPAINT) {

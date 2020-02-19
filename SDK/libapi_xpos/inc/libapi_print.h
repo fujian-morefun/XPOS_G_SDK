@@ -48,7 +48,6 @@ Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:LinZhu
 Functions:String printing with automatic line break function, support \r, \n newline
 Input : str:     Need to print string information
-		attrib:  Font size: 0 small, 1 medium, 2 large
 		linegap: Line spacing: unit pixels, 0 is the default value (for Pin printing use)
 		newline: 0 Does not support line breaks;1 support \r, \n newline
 Output : Nothing
@@ -56,7 +55,7 @@ return: UPRN_CACHE_ERR        = -7,            //Save cache failed
 		UPRN_SUCCESS          =  0		       //Success
 Remarks: Save the string to the printer cache and call Print Start (Print_Start) to print
 *************************************************************************************/
-LIB_EXPORT int UPrint_Str(char *str, byte attrib, int linegap, byte newline);
+LIB_EXPORT int UPrint_Str(char *str, int linegap, byte newline);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -96,7 +95,6 @@ Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:LinZhu
 Functions:String printing (UPrint_StrBold) with automatic line feed function, support \r, \n newline
 Input : pszStr:    Need to print string information
-		cAttrib:   Font size: 0 small, 1 medium, 2 large
 		cPattern:  Print position: 0 left, 1 center, 2 right
 		nlinegap:  Line spacing, unit pixels, 0 is the default value (for Pin printing use)
 		newline: 0 Does not support line breaks;1 support \r, \n newline
@@ -105,7 +103,7 @@ return: UPRN_CACHE_ERR        = -7,             //Save cache failed
 		UPRN_SUCCESS          =  0				//Success
 Remarks: Save the string to the printer cache and call Print Start (Print_Start) to print
 *************************************************************************************/
-LIB_EXPORT int UPrint_StrBold(char *pszStr, byte cAttrib, byte cPattern,int nLinegap, byte newline);
+LIB_EXPORT int UPrint_StrBold(char *pszStr, byte cPattern,int nLinegap, byte newline);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -135,5 +133,31 @@ Remarks: Convert data to QR code and print
 *************************************************************************************/
 LIB_EXPORT int UPrint_MatrixCode(const char *psMatrixCode, int nLen,byte cSize,byte cPattern);
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:LinZhu
+Functions:Set print font
+Input : size: Set print English font size(0--8)
+		zoom_w: Set the horizontal magnification of English(1--5)
+		zoom_h: Set the vertical magnification of English(1--5)
+Output : Nothing
+return: UPRN_CACHE_ERR        = -7,            //Save cache failed
+		UPRN_SUCCESS          =  0		       //Success
+Remarks: 
+*************************************************************************************/
+LIB_EXPORT int UPrint_SetFont(int size, int zoom_w, int zoom_h);
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:LinZhu
+Functions:Set print density
+Input : v: Set print density (1--5, 3 is normal)
+Output : Nothing
+return: UPRN_CACHE_ERR        = -7,            //Save cache failed
+		UPRN_SUCCESS          =  0		       //Success
+Remarks: 
+*************************************************************************************/
+LIB_EXPORT int UPrint_SetDensity(int v);
 
 #endif /*__LIBAPI_PRINT_HEADER__*/

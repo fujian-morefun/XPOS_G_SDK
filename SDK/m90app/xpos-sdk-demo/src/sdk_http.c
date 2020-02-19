@@ -16,11 +16,12 @@ static void http_pack(char * buff, char * msg)
 	int index = 0;
 	int msgl =strlen(msg);
 
-	index += sprintf(buff + index , "GET %s HTTP/1.1\r\n", "/");
-	index += sprintf(buff + index , "HOST: %s\r\n" , "www.baidu.com:443" );//www.baidu.com
-	index += sprintf(buff + index , "Connection: Keep-Alive\r\n");
+	index += sprintf(buff + index , "POST %s HTTP/1.1\r\n", "/mpos/handshake");
+	index += sprintf(buff + index , "HOST: %s\r\n" , "test.mosambee.in" );//www.baidu.com
+	//index += sprintf(buff + index , "Connection: Keep-Alive\r\n");
 	index += sprintf(buff + index , "Content-Length: %d\r\n", msgl);
-	index += sprintf(buff + index , "Content-Type: text/plain;charset=UTF-8\r\n");	
+	//index += sprintf(buff + index , "Content-Type: text/plain;charset=UTF-8\r\n");	
+	index += sprintf(buff + index , "Content-Type: application/x-www.form-urlencoded;charset=UTF-8\r\n");	
 	index += sprintf(buff + index , "\r\n");
 
 	index += sprintf(buff + index , "%s", msg);
@@ -281,7 +282,7 @@ static void http_test()
 	char *msg = "hello world!";
 	char buff[2048]={0};
 	char recv[2048]={0};
-	char *ip = "www.baidu.com";//119.75.217.109
+	char *ip = "test.mosambee.in";//119.75.217.109
 	int port = 80;
 	int ret = -1;
 	int sock = 0;
@@ -354,10 +355,10 @@ static void http_test()
 
 static void https_test()
 {
-	char *msg = "hello world";//080022380000008000009A00000530081329000001081329053020390013
+	char *msg = "requestMessage=imeiNumber=865789024229520|osId=80dad2df0e73f8dc|applicationId=31|imsiNumber=8991921802931780305|qposSerialNo=171257333221017301489555|make=INGENICO|model=Move2500|appVersion=1.0.0|androidVersion=11.16.05 Patch(b54)|versionCode=0|&deviceSerialNumber=0000000000";//080022380000008000009A00000530081329000001081329053020390013
 	char buff[2048]={0};
 	char recv[2048]={0};
-	char *ip = "www.baidu.com";
+	char *ip = "test.mosambee.in";//104.27.134.11
 	int port = 443;
 	int ret = - 1;
 	char apn[32]="CMNET";
@@ -418,7 +419,7 @@ static void https_test()
 
 	if(ret == 0){
 		comm_ssl_send(COMM_SOCK , buff ,  strlen(buff));		// 		Send http request		
-		ret = https_recv(COMM_SOCK, recv, 1024, 30000);		// Receive http response
+		ret = https_recv(COMM_SOCK, recv, 2048, 30000);		// Receive http response
 		if (ret > 0)
 		{
 			sprintf(buff, "recv buff:%s", recv);

@@ -268,5 +268,26 @@ Remarks: Nothing
 LIB_EXPORT int Sys_scaner_close();
 
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:linzhu
+Functions:Set app version
+Input : pszVer  the app version
+Output :
+return: USYS_SUCCESS        =  0	 	Success
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT int Sys_SetAppVer(char *pszVer);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:linzhu
+Functions:Get app version
+Input : 
+Output :
+return: the app version
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT const char * Sys_GetAppVer();
 
 #endif /*__LIBAPI_SYSTEM_HEADER__*/

@@ -105,7 +105,7 @@ static void _dateTime_Paint(DATETIME_ST * pdt)
 
 			gui_bar_rc(textLeftPos, tipTopPos, tipLeftPos, tipTopPos + nTextHeight);
 		}
-		xgui_TextOut(textLeftPos, tipTopPos, buf);
+		gui_text_out(textLeftPos, tipTopPos, buf);
 
 		gui_text_out(tipLeftPos, tipTopPos, dateTimeTip[i]);
 	}

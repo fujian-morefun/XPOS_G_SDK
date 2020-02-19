@@ -138,6 +138,27 @@ return: 0,     success
 *************************************************************************************/
 LIB_EXPORT int dukpt_3des_run_ex(int mode, char *ind, int size, char *outd, int des_mode, int key_tpye);
 
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:Initialize the dukpt key use IPEK
+Input : 	type:		Initial key type
+						0 = ipek 1= bdk
+			mode:		Encryption method of initial key
+						0=Plaintext 1= tmk encryption 2= kek encryption
+			gid:		Key grouping£¬0
+			init_ksn:	Initial ksn	
+			init_key:	Initial key
+			kvc		:	Key kvc(Key plaintext encryption 8 0x00)
+Output :   Nothing
+return: 0,     success
+		Other, failure
+*************************************************************************************/
+LIB_EXPORT int dukpt_load_key(int mode, int type, int gid, unsigned char* init_ksn, unsigned char* init_key, char * kvc);
+
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx

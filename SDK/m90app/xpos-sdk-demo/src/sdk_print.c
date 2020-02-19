@@ -411,49 +411,88 @@ void sdk_print()
 	gui_end_batch_paint();
 
 
-	ret = UPrint_Init();
+	while(1)
+	{
+		ret = UPrint_Init();
 
-	if (ret == UPRN_OUTOF_PAPER)
-	{
-		gui_messagebox_show( "Print" , "No paper" , "" , "confirm" , 0);
-	}
+		if (ret == UPRN_OUTOF_PAPER)
+		{
+			gui_messagebox_show( "Print" , "No paper" , "" , "confirm" , 0);
+		}
 
-	UPrint_StrBold("PRINT TEST", 2, 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetDensity(3);//Set print density to 15
+		UPrint_SetFont(0, 1, 1);
+		UPrint_StrBold("SetDensity 3", 1, 4, 1);//Centered large font print title,empty 4 lines	
 
-	UPrint_Str("test small", 0, 2, 1);//打印小字体
-	UPrint_Str("test medium", 1, 2, 1);//打印中字体
-	UPrint_Str("test large", 2, 2, 1);//打印大字体
-	UPrint_Str("print image", 1, 2, 1);
-	sprintf(filename, "xxxx\\%s", TESTIMG);
-	UPrint_BitMap(filename, 1);//打印图片
-	UPrint_Feed(20);
-	strcpy(qr, "QR code test 123");
-	UPrint_Str("print QR code", 1, 2, 1);
-	UPrint_MatrixCode(qr, strlen(qr), 1, 1);
-	UPrint_Str(ENDLINE, 0, 0, 1);
-	
-	UPrint_Feed(108);
+		UPrint_SetFont(7, 2, 2);
+		UPrint_StrBold("PRINT TEST", 1, 4, 1);//Centered large font print title,empty 4 lines	
+		
+		UPrint_SetFont(0, 1, 1);
+		UPrint_StrBold("PRINT FONT 0,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(1, 1, 1);
+		UPrint_StrBold("PRINT FONT 1,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(2, 1, 1);
+		UPrint_StrBold("PRINT FONT 2,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(3, 1, 1);
+		UPrint_StrBold("PRINT FONT 3,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(4, 1, 1);
+		UPrint_StrBold("PRINT FONT 4,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(5, 1, 1);
+		UPrint_StrBold("PRINT FONT 5,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(6, 1, 1);
+		UPrint_StrBold("PRINT FONT 6,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(7, 1, 1);
+		UPrint_StrBold("PRINT FONT 7,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
+		UPrint_SetFont(8, 1, 1);
+		UPrint_StrBold("PRINT FONT 8,,,,", 1, 4, 1);//Centered large font print title,empty 4 lines
 
-	ret = UPrint_Start();
-	if (ret == UPRN_SUCCESS)
-	{
-		gui_messagebox_show( "Print" , "Print Success" , "" , "confirm" , 0);
-	}
-	else if (ret == UPRN_OUTOF_PAPER)
-	{
-		gui_messagebox_show( "Print" , "No paper" , "" , "confirm" , 0);
-	}
-	else if (ret == UPRN_FILE_FAIL)
-	{
-		gui_messagebox_show( "Print" , "Open File Fail" , "" , "confirm" , 0);
-	}
-	else if (ret == UPRN_DEV_FAIL)
-	{
-		gui_messagebox_show( "Print" , "Printer device failure" , "" , "confirm" , 0);
-	}
-	else
-	{
-		gui_messagebox_show( "Print" , "Printer unknown fault" , "" , "confirm" , 0);
+		UPrint_SetFont(8, 1, 1);
+		UPrint_Str("test small,", 2, 1);//print small font
+		UPrint_SetFont(8, 2, 2);
+		UPrint_Str("test medium", 2, 1);//print normal font
+		UPrint_SetFont(8, 4, 4);
+		UPrint_Str("test large", 2, 1);//print large font
+		UPrint_SetFont(8, 2, 2);
+		UPrint_Str("print image", 2, 1);
+		sprintf(filename, "xxxx\\%s", TESTIMG);
+		UPrint_BitMap(filename, 1);//print image
+		UPrint_Feed(20);
+		strcpy(qr, "QR code test 123");
+		UPrint_SetFont(8, 2, 2);
+		UPrint_Str("print QR code", 2, 1);
+		UPrint_MatrixCode(qr, strlen(qr), 1, 1);
+		UPrint_Str(ENDLINE, 0, 1);
+		
+		UPrint_Feed(108);
+
+		ret = UPrint_Start();
+		if (ret == UPRN_SUCCESS)
+		{
+			gui_messagebox_show( "Print" , "Print Success" , "" , "confirm" , 0);
+			break;
+		}
+		else if (ret == UPRN_OUTOF_PAPER)
+		{			
+			if (gui_messagebox_show( "Print" , "No paper!Load paper and press OK" , "cancel" , "confirm" , 0) != 1)
+			{
+				break;
+			}
+		}
+		else if (ret == UPRN_FILE_FAIL)
+		{
+			gui_messagebox_show( "Print" , "Open File Fail" , "" , "confirm" , 0);
+			break;
+		}
+		else if (ret == UPRN_DEV_FAIL)
+		{
+			gui_messagebox_show( "Print" , "Printer device failure" , "" , "confirm" , 0);
+			break;
+		}
+		else
+		{
+			gui_messagebox_show( "Print" , "Printer unknown fault" , "" , "confirm" , 0);
+			break;
+		}
 	}
 }
 
