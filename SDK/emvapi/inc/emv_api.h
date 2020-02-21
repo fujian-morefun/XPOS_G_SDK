@@ -73,7 +73,7 @@ typedef struct __st_read_card_out{
 	char signature_flag;//0x01 Need signature;0x00 No signature
 }st_read_card_out;
 
-//#define EMVAPI_VER				"EMVAPI_2020-01-10_XP"
+
 #define EMVAPI_VER				"EMVAPI20200218XP"
 //Transaction Result Code
 #define EMVAPI_RET_TC	 0	 //TC Approval
