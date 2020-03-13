@@ -3,7 +3,7 @@
 #include "emvapi/inc/emv_api.h"
 #include "libapi_xpos/inc/def.h"
 #include "libapi_xpos/inc/libapi_emv.h"
-#include "apppub/mfd/mf_security.h"
+#include "libapi_xpos/inc/libapi_security.h"
 #include "sdk_readcard.h"
 
 #define APP_TRACE	printf
@@ -34,7 +34,7 @@ static void card_in_config(char*title, st_read_card_in *card_in)
 	card_in->trans_type=0;//EMV_SALE£¨0x00£© or EMV_CASHBACK£¨0x09£©;
 	card_in->pin_input=1;
 	card_in->pin_max_len=12;
-	card_in->key_pid = KF_DUKPT;//1 KF_MKSK 2 KF_DUKPT
+	card_in->key_pid = SEC_DUKPT_FIELD;//SEC_MKSK_FIELD	0x01 SEC_DUKPT_FIELD 0x02
 	card_in->pin_mksk_gid=-1;//The key index of MKSK; -1 is not encrypt
 	card_in->pin_dukpt_gid=0;//The key index of DUKPT PIN KEY
 	card_in->data_dukpt_gid=1;//The key index of DUPKT Track data KEY	
@@ -53,14 +53,14 @@ int upay_consum( void )
 	char *title = "SALE";
 	int ret;
     long long namt = 0;
-	st_read_card_in *card_in =NULL;
-	st_read_card_out *card_out =NULL;
+	st_read_card_in *card_in =0;
+	st_read_card_out *card_out =0;
 	st_card_info card_info={0};
 
 	APP_TRACE( "upay_consum" );
 
 	card_in=(st_read_card_in *)malloc(sizeof(st_read_card_in));
-	if(card_in==NULL)
+	if(card_in==0)
 		return FAIL;
 
 	card_in_config(title,card_in);//config before card reading

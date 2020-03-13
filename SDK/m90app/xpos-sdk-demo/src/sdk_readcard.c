@@ -4,7 +4,7 @@
 #include "emvapi/inc/emv_api.h"
 #include "libapi_xpos/inc/def.h"
 #include "libapi_xpos/inc/libapi_emv.h"
-#include "AppPub/mfd/mf_security.h"
+#include "libapi_xpos/inc/libapi_security.h"
 #include "sdk_readcard.h"
 
 #define APP_TRACE	printf
@@ -231,8 +231,8 @@ static void unpack_ic_online_data(char*host_Rsp,int len_Rsp,char*szAuthCode,char
 //IC card secondary authorization
 int sdk_online_proc(int ic_online_resp)
 {
-	char *msg_Buf = NULL;
-	char *host_Rsp = NULL;
+	char *msg_Buf = 0;
+	char *host_Rsp = 0;
 	int	len_Send = 0;
 	int	len_Rsp = 0;
 	int nOnlineRes = -1;			
@@ -286,14 +286,14 @@ int sdk_online_proc(int ic_online_resp)
 static void add_capkByAid(unsigned char* cAID,unsigned char Index)
 {
 	CAPUBLICKEY ppkKey;
-	char *szBuf = NULL;
+	char *szBuf = 0;
 	char szHash[20]={0};
 
 	int nLen = 0;
 	int npacklen = 0;
 	nLen = sizeof(CAPUBLICKEY)+30;
 	szBuf = (char *)malloc(nLen);
-	if(NULL == szBuf) {
+	if(0 == szBuf) {
 		return ;
 	}
 	memset(&ppkKey,0,sizeof(CAPUBLICKEY));
@@ -397,13 +397,13 @@ static void init_capk_param(int binitial)
 static void init_aid_param(int binitial)
 {
 	int nret = UEMV_PRM_OK;
-	TERMINALAPPLIST *TerminalApps=NULL;
+	TERMINALAPPLIST *TerminalApps=0;
 
 	if(binitial)
 		EMV_PrmClearAIDPrmFile();
 
 	TerminalApps=(TERMINALAPPLIST*)malloc(sizeof(TERMINALAPPLIST));
-	if(TerminalApps==NULL)
+	if(TerminalApps==0)
 		return;
 	/*EMV_PrmGetAIDPrm(TerminalApps);
 	if(UEMV_PRM_OK==nret)
@@ -491,8 +491,8 @@ void clear_service_prmacqkey(void)
 void init_service_prmacqkey(int binitial)
 {
 	int nret = UEMV_PRM_OK;
-	RUPAYPRMACQKEYLIST *pRuPayPRMacqKeyList = NULL;
-	RUPAYSERVICELIST *pRuPayServiceList=NULL;
+	RUPAYPRMACQKEYLIST *pRuPayPRMacqKeyList = 0;
+	RUPAYSERVICELIST *pRuPayServiceList=0;
 
 	if(binitial)
 	{
@@ -503,7 +503,7 @@ void init_service_prmacqkey(int binitial)
 
 	//PRMacqKey
 	pRuPayPRMacqKeyList=(RUPAYPRMACQKEYLIST*)malloc(sizeof(RUPAYPRMACQKEYLIST));
-	if(pRuPayPRMacqKeyList==NULL)
+	if(pRuPayPRMacqKeyList==0)
 		return;
 	
 	memset(pRuPayPRMacqKeyList,0,sizeof(RUPAYPRMACQKEYLIST));
@@ -519,7 +519,7 @@ void init_service_prmacqkey(int binitial)
 
 	//Service
 	pRuPayServiceList=(RUPAYSERVICELIST*)malloc(sizeof(RUPAYSERVICELIST));
-	if(pRuPayServiceList==NULL)
+	if(pRuPayServiceList==0)
 		return;
 
 	memset(pRuPayServiceList,0,sizeof(RUPAYSERVICELIST));
