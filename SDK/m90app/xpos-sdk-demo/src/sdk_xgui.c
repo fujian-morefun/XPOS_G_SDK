@@ -156,8 +156,9 @@ static int _menu_proc(char *pid)
 	 if (strcmp(pid , "Sale") == 0){
 		upay_consum();
 	}
-	else if (strcmp(pid , "Version") == 0){
+	 else if (strcmp(pid , "Version") == 0){
 		sprintf(msg , "app:%s\r\n", Sys_GetAppVer());
+		sprintf(msg+ strlen(msg) , "Device Type:%s\r\n", Sys_GetDeviceType() == SYS_DEVICE_TYPE_H9G ? "H9G":"MP70G");
 		sprintf(msg + strlen(msg), "hardware:%s\r\n", sec_get_hw_ver());
 		sprintf(msg + strlen(msg), "fireware:%s\r\n", sec_get_fw_ver());
 		getversions(msg+ strlen(msg));
