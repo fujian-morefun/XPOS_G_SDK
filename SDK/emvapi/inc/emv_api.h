@@ -2,7 +2,7 @@
 #include "pub/pub.h"
 //reference to emv_interface.h
 
-#define EMVAPI_VER				"EMVAPI20200317ZY"
+#define EMVAPI_VER				"EMVAPI20200320ZY"
 
 #define MODE_API_UNKNOW			0x00
 #define	MODE_API_PBOC			0x01
@@ -42,7 +42,7 @@ typedef struct __st_read_card_in{
 	char other_amt[32];
 	int card_mode;
 	int card_timeover;
-	int pin_input;  //For DIP and TAP cards. 0x01: enter the PIN interface according to the emv_read_card internal
+	int pin_input;  //For DIP and TAP cards. 0x01: enter the PIN interface according to the emv_read_card internal; 0x02:forces the PIN interface  of online transactions 
 	int mag_mode;	//For magnetic stripe cards. 0x01: The application determines whether to enter the PIN interface according to the service_code; 0x00:require a PIN from emv_read_card internal
 	int pin_max_len;
 	int pin_timeover;
@@ -57,6 +57,7 @@ typedef struct __st_read_card_in{
 	char ic_tags[256];
 	char card_page_msg[50];	
 	int ic_online_resp;
+	int nTransSerial_9f41;
 }st_read_card_in;
 
 #define TRACK_MAX_LENTH		144
