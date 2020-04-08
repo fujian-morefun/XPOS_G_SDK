@@ -3,8 +3,7 @@
 //#include "libapi_xpos/inc/libapi_emv.h"
 
 
-#define APP_VER "DEMO-V1.1.6T"
-
+#define APP_VER "DEMO-V1.1.7T"
 
 void app_main()
 {

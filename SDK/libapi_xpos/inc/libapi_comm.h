@@ -30,6 +30,7 @@ return: 0,     success
 *************************************************************************************/
 LIB_EXPORT int comm_net_link(char * title, char * apn , int timeover);
 
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx
@@ -63,7 +64,7 @@ LIB_EXPORT int comm_net_unlink();
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx
-Functions:create sock
+Functions:create socket
 Input : index(0/1)
 Output : Nothing
 return: 0,     success
@@ -250,7 +251,25 @@ return: 1,     connection
 *************************************************************************************/
 LIB_EXPORT int comm_wifi_get_link_state();
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lxz
+Functions:Getting WIFI signal value
+Input : 
+Output : 
+return: 0 Unregistered Internet  1-4 Signal Lattice Number
+*************************************************************************************/
+LIB_EXPORT int comm_wifi_get_signal();
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lxz
+Functions:Getting GPRS signal value
+Input : 
+Output : 
+return: 0 Unregistered Internet  1-4 Signal Lattice Number
+*************************************************************************************/
+LIB_EXPORT int comm_gprs_get_signal();
 
 #ifdef __cplusplus
 }
