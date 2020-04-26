@@ -143,8 +143,8 @@ static void sdk_add_demo_aids(TERMINALAPPLIST *TerminalApps)
 		TerminalApps->TermApp[i].bTerminalPriority = 0x03;	//Terminal priority
 		TerminalApps->TermApp[i].bTargetPercentageInt = 0x00;/*Randomly selected target percentage DF17*/
 		memcpy(TerminalApps->TermApp[i].TAC_Default, "\x00\x00\x00\x00\x00", 5);/* TAC Default data format (n5) DF11*/ 
-		memcpy(TerminalApps->TermApp[i].TAC_Denial, "\x00\x00\x00\x00\x00", 5);/* TAC Refuse: data format (n5) DF12*/
-		memcpy(TerminalApps->TermApp[i].TAC_Online, "\x00\x00\x00\x00\x00", 5);/* TAC Online: data format (n5) DF13*/
+		memcpy(TerminalApps->TermApp[i].TAC_Denial, "\x00\x00\x00\x00\x00", 5);/* TAC Refuse: data format (n5) DF13*/
+		memcpy(TerminalApps->TermApp[i].TAC_Online, "\x00\x00\x00\x00\x00", 5);/* TAC Online: data format (n5) DF12*/
 		memcpy(TerminalApps->TermApp[i].abTrnCurrencyCode, COUNTRYCODE, 2);/* Currency code tag: 5F2A */
 		//memcpy(TerminalApps->TermApp[i].abTerminalCountryCode, COUNTRYCODE, 2);/* Country code terminal tag: 9F1A */
 		TerminalApps->TermApp[i].abTrnCurrencyExp = 0x02;/* tag: 5F36 */

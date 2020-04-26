@@ -2,7 +2,7 @@
 #include "pub/pub.h"
 //reference to emv_interface.h
 
-#define EMVAPI_VER				"EMVAPI20200320ZY"
+#define EMVAPI_VER				"EMVAPI20200420ZY"
 
 #define MODE_API_UNKNOW			0x00
 #define	MODE_API_PBOC			0x01
@@ -79,7 +79,7 @@ typedef struct __st_read_card_out{
 	char vChName[45 +1];
 	int nEmvMode;
 	char signature_flag;//0x01 Need signature;0x00 No signature
-	char service_code[3];
+	char service_code[3+1];
 }st_read_card_out;
 
 
