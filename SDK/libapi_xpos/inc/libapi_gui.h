@@ -8,8 +8,8 @@
 #define GUI_IME_MODE_NUMBER			(1<<3)		//Allow input of numbers
 
 
-//#define GUI_LINE_TOP(a)		(33 * a)
-#define GUI_LINE_TOP(a)						xgui_GetLineTop(a)
+#define GUI_LINE_TOP(a)		(33 * a)
+//#define GUI_LINE_TOP(a)						xgui_GetLineTop(a)
 
 #define GUI_GUIFIRST				0x000A0000
 #define GUI_GUIPAINT				0x000A0001
