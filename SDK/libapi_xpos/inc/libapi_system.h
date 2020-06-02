@@ -389,6 +389,7 @@ Remarks: Nothing
 LIB_EXPORT const char * Sys_GetAppVer();
 
 
+LIB_EXPORT int Sys_TaskCreate( void *pfun , int prio, char * stk, int task_size );
 
 #define SYS_DEVICE_TYPE_H9G		18
 #define SYS_DEVICE_TYPE_M70G    20
