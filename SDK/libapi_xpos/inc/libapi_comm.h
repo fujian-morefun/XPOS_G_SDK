@@ -30,6 +30,7 @@ return: 0,     success
 *************************************************************************************/
 LIB_EXPORT int comm_net_link(char * title, char * apn , int timeover);
 
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx
@@ -63,7 +64,7 @@ LIB_EXPORT int comm_net_unlink();
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx
-Functions:create sock
+Functions:create socket
 Input : index(0/1)
 Output : Nothing
 return: 0,     success
@@ -249,6 +250,149 @@ return: 1,     connection
 		0 ,    disconnect
 *************************************************************************************/
 LIB_EXPORT int comm_wifi_get_link_state();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi signal
+Input : 
+Output : 
+return: wifi signal
+*************************************************************************************/
+LIB_EXPORT int comm_wifi_get_signal();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi signal
+Input : 
+Output : 
+return: wifi signal
+*************************************************************************************/
+LIB_EXPORT char * wifi_get_ssid();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi ap mac address
+Input : 
+Output : 
+return: ap mac address
+*************************************************************************************/
+LIB_EXPORT char * wifi_get_ap_mac();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi rssi
+Input : 
+Output : 
+return: rssi
+*************************************************************************************/
+LIB_EXPORT int wifi_get_rssi();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi channel
+Input : 
+Output : 
+return: channel
+*************************************************************************************/
+LIB_EXPORT int wifi_get_channel();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi local mac address
+Input : 
+Output : 
+return: local mac address
+*************************************************************************************/
+LIB_EXPORT char * wifi_get_local_mac();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi local ip
+Input : 
+Output : 
+return: wifi signal
+*************************************************************************************/
+LIB_EXPORT char * wifi_get_local_ip();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get Module imei
+Input : 
+Output : 
+return: imei
+*************************************************************************************/
+LIB_EXPORT const char * comm_atc_imei();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get Module sim card status
+Input : 
+Output : 
+return: sim card status
+*************************************************************************************/
+LIB_EXPORT int comm_atc_cpin();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get Module imsi
+Input : 
+Output : 
+return: imsi
+*************************************************************************************/
+LIB_EXPORT const char * comm_atc_imsi();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get Module signal
+Input : 
+Output : 
+return: signal
+*************************************************************************************/
+LIB_EXPORT int comm_atc_signal();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get net registered cell
+Input : 
+Output : 
+return: cell
+*************************************************************************************/
+LIB_EXPORT int comm_atc_cell();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get net registered lac
+Input : 
+Output : 
+return: lac
+*************************************************************************************/
+LIB_EXPORT int comm_atc_lac();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get Module iccid
+Input : 
+Output : 
+return: iccid
+*************************************************************************************/
+LIB_EXPORT const char * comm_atc_iccid();
 
 
 

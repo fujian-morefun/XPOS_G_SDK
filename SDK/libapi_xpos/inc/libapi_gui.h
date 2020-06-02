@@ -9,6 +9,7 @@
 
 
 #define GUI_LINE_TOP(a)		(33 * a)
+//#define GUI_LINE_TOP(a)						xgui_GetLineTop(a)
 
 #define GUI_GUIFIRST				0x000A0000
 #define GUI_GUIPAINT				0x000A0001
@@ -406,6 +407,17 @@ return: Nothing
 *************************************************************************************/
 LIB_EXPORT void gui_page_op_paint(char * left_str, char * right_str);
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:Set input method parameters
+Input : def_mode		Default input method
+		  allow_mode	Support input method
+		  password      enter password
+Output : Nothing			
+return: Nothing
+*************************************************************************************/
+LIB_EXPORT int gui_ime_set_mode(int def_mode, int allow_mode, int password);
 
 
 /*************************************************************************************
@@ -559,9 +571,10 @@ return: Nothing£¬Show attention to release pbits
 LIB_EXPORT void gui_out_bits_ex(int x, int y, unsigned char *pbits, int width , int height, int mode , int color);
 
 
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
-Author:linzhu
+Author:lxz
 Functions:display image
 Input : x				X coordinate
 		  y				Y coordinate	
@@ -569,11 +582,11 @@ Input : x				X coordinate
 		  width			Image width
 		  height		Picture height
 		  mode			0 Positive display, 1 Reverse display
-		  zoom			Magnification
+		  zoom			Amplification factor
 Output : Nothing
 return: Nothing£¬Show attention to release pbits
 *************************************************************************************/
-LIB_EXPORT void gui_out_bits_zoom(int x, int y, unsigned char *pbits, int width , int height, int mode , int zoom);
+LIB_EXPORT void gui_out_bits_zoom(int x, int y, unsigned char *pbits, int width , int height, int mode, int zoom);
 
 
 /*************************************************************************************
@@ -658,4 +671,29 @@ Output: Nothing
 return: Nothing
 *************************************************************************************/
 LIB_EXPORT void gui_menuhightlinecolor( int color);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:Display text on the screen ,Show only English
+Input :   pMsg		pmsg content
+		  top		top  coordinate
+		
+Output : Nothing			
+return: 0			success
+*************************************************************************************/
+LIB_EXPORT void  gui_textout_line_center(char *pMsg , int top);
 
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lxz
+Functions:Refresh the specified area
+Input : left		Left border
+		top		Upper boundary
+		right		Right border
+		bottom	Lower boundary
+		color  Refresh with specified color	
+Output : Nothing			
+return: 0			success
+*************************************************************************************/
+LIB_EXPORT void gui_clear_rect(int left, int top, int right, int bottom, int color);

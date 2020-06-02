@@ -6,6 +6,7 @@
 #include "libapi_xpos/inc/libapi_gui.h"
 #include "libapi_xpos/inc/libapi_security.h"
 #include "libapi_xpos/inc/libapi_emv.h"
+#include "libapi_xpos/inc/libapi_version.h"
 
 #define LOGOIMG "xxxx\\logo2.bmp"
 
@@ -39,6 +40,7 @@ static  const st_gui_menu_item_def _menu_def[] = {
 	{"Test",    	"M1 Test",      ""},
 	{"Test",    	"Gui Color",      ""},
 	{"Test",    	"Sign Page",      ""},
+	{"Test",    	"RKI Test",      ""},
 
 	{"Security",	"InitDukpt",	""},
 	{"Security",	"SetMainKey",	""},
@@ -54,6 +56,11 @@ static  const st_gui_menu_item_def _menu_def[] = {
 	
 	{"Others",		"View AID",		""},
 	{"Others",		"View CAPK",	""},
+	{"Others",		"View emv",	""},
+	{"Others",		"View Service",		""},
+	{"Others",		"View PRMacqKey",	""},
+	{"Others",		"RP SrData Clear",	""},
+	{"Others",		"RP SrData DlTest",	""},
 };
 
 
@@ -113,6 +120,28 @@ static void ShowString()
 }
 
 
+static int getversions( char *buff)
+{
+	int i = 0;
+
+	i += sprintf(buff + i, "api:%s\r\n", libapi_version());
+	i += sprintf(buff + i, "apppub:%s\r\n", apppub_version());
+	i += sprintf(buff + i, "atc:%s\r\n", atc_version());
+	i += sprintf(buff + i, "json:%s\r\n", json_version());
+	i += sprintf(buff + i, "net:%s\r\n", net_version());
+	i += sprintf(buff + i, "power:%s\r\n", power_version());
+	i += sprintf(buff + i, "producttest:%s\r\n", producttest_version());
+	i += sprintf(buff + i, "pub:%s\r\n", pub_version());
+	i += sprintf(buff + i, "sqlite:%s\r\n", sqlite_version());
+	i += sprintf(buff + i, "switchcheck:%s\r\n", switchcheck_version());
+	i += sprintf(buff + i, "tms:%s\r\n", tms_version());
+	i += sprintf(buff + i, "wifi:%s\r\n", wifi_version());
+	i += sprintf(buff + i, "xgui:%s\r\n", xgui_version());
+
+	return i;
+}
+
+
 // The menu callback function, as long as all the menu operations of this function are registered, 
 // this function will be called, and the selected menu name will be returned. 
 // It is mainly determined in this function that the response menu name is processed differently.
@@ -121,17 +150,18 @@ static int _menu_proc(char *pid)
 	int ret;
 	char buff[20]={0};
 	int pos = 0;
-	char msg[256];
+	char msg[1024];
 
 
 	 if (strcmp(pid , "Sale") == 0){
 		upay_consum();
 	}
-	else if (strcmp(pid , "Version") == 0){
+	 else if (strcmp(pid , "Version") == 0){
 		sprintf(msg , "app:%s\r\n", Sys_GetAppVer());
+		sprintf(msg+ strlen(msg) , "Device Type:%s\r\n", Sys_GetDeviceType() == SYS_DEVICE_TYPE_H9G ? "H9G":"MP70G");
 		sprintf(msg + strlen(msg), "hardware:%s\r\n", sec_get_hw_ver());
 		sprintf(msg + strlen(msg), "fireware:%s\r\n", sec_get_fw_ver());
-		sprintf(msg + strlen(msg), "emv:%s\r\n", EMV_GetVersion());
+		getversions(msg+ strlen(msg));
 		gui_messagebox_show( "Version" , msg , "" , "confirm" , 0);
 
 	}
@@ -190,7 +220,24 @@ static int _menu_proc(char *pid)
 	{
 		EMV_ShowCAPK_Prm();
 	}
-
+	else if (strcmp(pid , "View emv") == 0){
+		sprintf(msg + strlen(msg), "%s\r\n", EMV_GetVersion());
+		gui_messagebox_show( "View emv" , msg , "" , "confirm" , 0);
+	}
+	else if(strcmp(pid , "View PRMacqKey") == 0){
+		EMV_ShowRuPayPRMacqKey();
+	}
+	else if(strcmp(pid , "View Service") == 0){
+		EMV_ShowRuPayService();
+	}
+	else if(strcmp(pid , "RP SrData DlTest") == 0)
+	{
+		init_service_prmacqkey(1);
+	}
+	else if(strcmp(pid , "RP SrData Clear") == 0)
+	{
+		clear_service_prmacqkey();
+	}
 	else if (strcmp(pid, "M1 Test") == 0)
 	{
 		//sdk_M1test();
@@ -207,7 +254,28 @@ static int _menu_proc(char *pid)
 	{
 		sign_page();
 	}
+	else if (strcmp(pid, "RKI Test") == 0)
+	{
+		int ret;
+		char keydata[2048];
+		char *key_data = "78020000BD2432A057569F7AFEA30D9035CA9772ECBC12E689B0E7877BD1FFD701F2B7951740132B816E1A4B6306847501DE8A711F9A8EF8E9DA40A54B8AAD73F24BDCD561C73EEE9CF49D23C9CA03C9AC789A9C71D3DC8E1375E752CC1175E54A930F07AEA49B1DAB84E34D017DDD00A9930862D6A5C3DD92A320A56184153E2813C8DEF05D76C8D438A0111EF8C9ADDA342BDF4E9472A7F5C815B52E8919108E6555BA44637A035E1410CC3D174257DB54CA524E289A8EDE916945B6B31222642E97A8DC6445E05F9D42071EA81FC44E1955791AE253DD5DE7CD5F2CC28F604F765D5EC38AE9105BA0F2BBBEEC7F79400C02D170E4442039DE57DD2A4833345CE5AE8855641485A7512096391FF1C4FE746056556D929DAE01B1DD3B30DF2337078E552A931088B6975F29BB0F65908D7DD81C4261047C345EE9B73B48DC199EB2231A3F64E40B73743EB05446F50D348B53AD364424698CC104F5188AA53C276332E24508AC5CFEB35C3C74710FA02155E04C4835878E8C425C69BCF224E64C5F8F54668078DAB8F33BD28EDD8A0221A9949F317E4584C4FE0F69920EC60493595213D9DD1BEFC71F2F203A5C69381B8C57F94803DAA78D7E21AE535DE0F260A87A7B54AAE387026B10E3DEB979DFF5752801D2D7BC2BD592CC1EA8E5855932678C2B7E518ED625CF25FBEBC4D8CB79D0F6FC29D9C53483B3D00A3743A9EF5B6A9FE6A16FEE7D238F8EDDAF98E8C4168D17EA9FA00A53944FEFB34ECA219B45AAA7A629323B07F7FA66C417CE21133FCEAA3C39A467DFE720BC1C22B919B3E01F1BB1EE24794E632EC67EA0F59CF90392C56746C6CCE4DC6393556EC089B15E0024F314E36177A87FA1E98165867011C7F6A48D4DA6574A85BE6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+		int keydatalen = 0;
 
+		keydatalen =strlen(key_data);
+		Util_Asc2Bcd( key_data , keydata,keydatalen);
+		keydatalen /= 2;
+
+		ret = rki_dukpt_load( keydata, keydatalen);
+
+		if ( ret == 0)
+		{
+			gui_messagebox_show(pid , "Success" , "" , "confirm" , 0);
+		}
+		else{
+			gui_messagebox_show(pid, "Fail" , "" , "confirm" , 0);
+		}
+		return ret;
+	}
 	
 	return 0;
 }
@@ -369,7 +437,11 @@ void sdk_main_page()
 	char time_last[20];
 	int i;
 #ifdef WIN32
-	sign_page();
+	//sign_page();
+	//_menu_proc("Version");
+
+
+	rki_self_test();
 #endif
 
 	if(xgui_init_flag == 0){

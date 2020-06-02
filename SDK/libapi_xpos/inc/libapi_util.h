@@ -282,4 +282,25 @@ Remarks:   Voice playback is non blocking.
 LIB_EXPORT void Util_Led(int num, int type);
 
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions: Request memory
+Input : size memory size
+Output : Nothing
+return: Application Memory Pointer
+*************************************************************************************/
+LIB_EXPORT void * Util_Malloc(int size);
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions: Release memory
+Input :A pointer to release memory
+Output : Nothing
+return: 
+*************************************************************************************/
+LIB_EXPORT void Util_Free( void * p);
+
 #endif /*__LIBAPI_UTIL_HEADER__*/
