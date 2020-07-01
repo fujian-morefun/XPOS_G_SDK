@@ -56,7 +56,7 @@ static  const st_gui_menu_item_def _menu_def[] = {
 	
 	{"Others",		"View AID",		""},
 	{"Others",		"View CAPK",	""},
-	{"Others",		"View emv",	""},
+	//{"Others",		"View emv",	""},
 	{"Others",		"View Service",		""},
 	{"Others",		"View PRMacqKey",	""},
 	{"Others",		"RP SrData Clear",	""},
@@ -125,6 +125,7 @@ static int getversions( char *buff)
 	int i = 0;
 
 	i += sprintf(buff + i, "api:%s\r\n", libapi_version());
+	i += sprintf(buff + i, "emv:%s\r\n", EMV_GetVersion());
 	i += sprintf(buff + i, "apppub:%s\r\n", apppub_version());
 	i += sprintf(buff + i, "atc:%s\r\n", atc_version());
 	i += sprintf(buff + i, "json:%s\r\n", json_version());
