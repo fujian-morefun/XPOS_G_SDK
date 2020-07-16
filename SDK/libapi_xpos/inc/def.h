@@ -1135,5 +1135,17 @@ unsigned char ucPrimeExponent[2][MAX_RSA_PRIME_LEN]; //CRT Index, prime and expo
 unsigned char ucCoefficient[MAX_RSA_PRIME_LEN];		 //CRT Coefficient, prime and prime division
 }RSAPRIVATEKEY;
 
+
+#define MAGTEK_TRACK_1_MAX_CHARS		(100)
+#define MAGTEK_TRACK_2_MAX_CHARS		(140)
+#define MAGTEK_TRACK_3_MAX_CHARS		(140)
+
+struct card_magtek_track_info {
+	unsigned char track1[MAGTEK_TRACK_1_MAX_CHARS];
+	unsigned char track2[MAGTEK_TRACK_2_MAX_CHARS];
+	unsigned char track3[MAGTEK_TRACK_3_MAX_CHARS];
+};
+
+
 #endif
 
