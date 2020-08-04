@@ -28,6 +28,8 @@ void rfid_mfcl_test(void)
 	unsigned char buf[MIFARE_CL_PAGE_SIZE];
 	int len = 16;
 	unsigned char key[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+	int sec = 1;
+	int block = 0;
 
 	mf_log_debug("start rfid tcl test\n");
 
@@ -43,18 +45,17 @@ void rfid_mfcl_test(void)
 
 			do {
 
-				if(mf_rfid_mfcl_auth(RFID_CMD_MIFARE_AUTH1A, 0) == 0) {
+				if(mf_rfid_mfcl_auth(RFID_CMD_MIFARE_AUTH1A, sec) == 0) {
 					mf_log_debug("auth ok....\n");
 
-
-
-					rc = mf_rfid_mfcl_read(0, buf, &len);
+					block = sec*4+0;
+					rc = mf_rfid_mfcl_read(block, buf, &len);
 					if(rc != 0) {
 						mf_log_debug("read error\n");
 						break;
 					}
 
-					mf_log_debug("read block 0 dump %s\n", hexdump(buf, len));
+					mf_log_debug("read block %d dump %s\n", block, hexdump(buf, len));
 
 					memset(buf, 0x0, sizeof(buf));
 
@@ -68,23 +69,24 @@ void rfid_mfcl_test(void)
 					buf[14] = ~0;
 					buf[15] = 0;
 
-					rc = mf_rfid_mfcl_write(1, buf, 16);
+					block = sec*4+1;
+					rc = mf_rfid_mfcl_write(block, buf, 16);
 					if(rc != 0) {
-						mf_log_debug("write block 1 error\n");
+						mf_log_debug("write block %d error\n", block);
 						break;
 					}
 
 					mf_log_debug("mf_rfid_mfcl_write ok\n");
 
 					len = 16;
-					rc = mf_rfid_mfcl_read(1,(unsigned char*) buf, (unsigned int*)&len);
+					rc = mf_rfid_mfcl_read(block,(unsigned char*) buf, (unsigned int*)&len);
 					if(rc != 0)
 						break;
-					mf_log_debug("read page 1 dump %s\n", hexdump(buf, len));
+					mf_log_debug("read page %d dump %s\n", block, hexdump(buf, len));
 
 					///////////////////////////////
 
-					if(mf_rfid_mfcl_increment(1, 10) < 0)
+					if(mf_rfid_mfcl_increment(block, 10) < 0)
 					{
 						mf_log_debug("mfcl_increment :failed\r\n");
 						break;
@@ -92,7 +94,7 @@ void rfid_mfcl_test(void)
 
 					mf_log_debug(" mfcl_increment OK\n");
 
-					if(mf_rfid_mfcl_transfer(1) < 0)
+					if(mf_rfid_mfcl_transfer(block) < 0)
 					{
 						mf_log_debug("mfcl_transfer :failed\r\n");
 						break;
@@ -103,12 +105,12 @@ void rfid_mfcl_test(void)
 
 
 					len = 16;
-					rc = mf_rfid_mfcl_read(1,(unsigned char*) buf, (unsigned int*)&len);
+					rc = mf_rfid_mfcl_read(block,(unsigned char*) buf, (unsigned int*)&len);
 					if(rc != 0)
 						break;
-					mf_log_debug("read page 1 dump %s\n", hexdump(buf, len));
+					mf_log_debug("read page %d dump %s\n", block, hexdump(buf, len));
 
-					if(mf_rfid_mfcl_restore(1) < 0)
+					if(mf_rfid_mfcl_restore(block) < 0)
 					{
 						mf_log_debug("mfcl_restore :failed\r\n");
 						break;
@@ -116,7 +118,7 @@ void rfid_mfcl_test(void)
 
 					mf_log_debug(" mfcl_restore OK\n");
 
-					if(mf_rfid_mfcl_decrement(1,10) < 0)
+					if(mf_rfid_mfcl_decrement(block, 10) < 0)
 					{
 						mf_log_debug("mfcl_decrement :failed\r\n");
 						break;
@@ -124,7 +126,7 @@ void rfid_mfcl_test(void)
 
 					mf_log_debug(" mfcl_decrement OK\n");
 
-					if(mf_rfid_mfcl_transfer(1) < 0)
+					if(mf_rfid_mfcl_transfer(block) < 0)
 					{
 						mf_log_debug("mfcl_transfer :failed\r\n");
 						break;
@@ -132,7 +134,7 @@ void rfid_mfcl_test(void)
 
 					mf_log_debug(" mfcl_transfer OK\n");
 
-					if(mf_rfid_mfcl_restore(1) < 0)
+					if(mf_rfid_mfcl_restore(block) < 0)
 					{
 						mf_log_debug("mfcl_restore :failed\r\n");
 						break;
@@ -143,10 +145,10 @@ void rfid_mfcl_test(void)
 
 
 					len = 16;
-					rc = mf_rfid_mfcl_read(1,(unsigned char*) buf, (unsigned int*)&len);
+					rc = mf_rfid_mfcl_read(block,(unsigned char*) buf, (unsigned int*)&len);
 					if(rc != 0)
 						break;
-					mf_log_debug("read page 1 dump %s\n", hexdump(buf, len));
+					mf_log_debug("read page %d dump %s\n", block, hexdump(buf, len));
 
 					/////////////////////////////
 

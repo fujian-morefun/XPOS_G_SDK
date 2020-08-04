@@ -168,6 +168,16 @@ LIB_EXPORT int Icc_CardInsertDetect();
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions: Clear magtek buffer
+Input :	 Nothing
+Output : nothing
+return: nothing
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void card_magtek_flush(void);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:ruansj
 Functions: Check if the terminal is swiping
 Input :	 Nothing

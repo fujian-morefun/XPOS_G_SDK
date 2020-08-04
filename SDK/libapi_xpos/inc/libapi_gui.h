@@ -697,3 +697,20 @@ Output : Nothing
 return: 0			success
 *************************************************************************************/
 LIB_EXPORT void gui_clear_rect(int left, int top, int right, int bottom, int color);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:linbx
+Functions:Display dialog
+Input : title			Message title
+		  msg			Message content
+		  pszLeftOp		Bottom left corner
+		  pszRightOp	Tip in the lower right corner
+		  timeover		overtime time
+		  flag		0:nothing 1:show timeout on title right side
+		  keylist:	support key value eg:{key0,key1,keyok};
+Output : presskey: return press key value			
+return:   1			Confirm return
+		  2			Cancel back
+		  3			Timeout		
+*************************************************************************************/
+LIB_EXPORT int gui_messagebox_showEx(char *title, char *msg , char* pszLeftOp, char* pszRightOp , int timeover,int flag,unsigned char * keylist, int * presskey);

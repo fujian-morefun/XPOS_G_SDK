@@ -415,6 +415,17 @@ Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT void Sys_tms_AppBusy(int nBusyState);
 
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:run tms update task
+Input : 
+Output :
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_tms_update();
+
 #define SYS_TRACE( ...)	osl_log( "app", 2 , __VA_ARGS__ )
 #define SYS_TRACE_BUFF(buff,size,tip) 	osl_log_buff_tip("app",2,buff, size , tip ,1 );
 

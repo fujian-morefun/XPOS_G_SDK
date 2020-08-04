@@ -20,6 +20,7 @@ return:
 *************************************************************************************/
 LIB_EXPORT int emv_read_card(st_read_card_in *card_in, st_read_card_out *card_out);
 
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:zhiyu
@@ -373,5 +374,26 @@ return: FAIL = -1,
 		SUCC =  0 
 *************************************************************************************/
 LIB_EXPORT int EMV_ClearRuPayPRMacqKeyFile(void);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:linbx
+Functions:set pin input message
+Input : st_msg£º detial in  emv_api.h
+
+return: 0
+*************************************************************************************/
+LIB_EXPORT int EMV_SetPinInputMsg(st_input_pin st_msg);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:linbx
+Functions:set read card show message
+Input : st_msg£º detial in  emv_api.h
+
+return: 0
+*************************************************************************************/
+
+LIB_EXPORT int EMV_SetReadCardShow(st_read_card_show st_msg);
 
 #endif
