@@ -84,6 +84,7 @@ return: 0,     success
 		Other, failure		
 *************************************************************************************/
 LIB_EXPORT int comm_sock_connect(int index, char * ip, int port);
+LIB_EXPORT int comm_sock_connect2(int index , char * ip , int port,void *func);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -186,8 +187,9 @@ Input : index		sock index
 	      data		ssl data
 		  size		Data size
 Output : Nothing			
-return: 0,     success
-		Other, failure		
+return: - 0 if the read end of the underlying transport was closed,
+        - the (positive) number of bytes read, or
+        - a negative error code on failure.	
 *************************************************************************************/
 LIB_EXPORT int comm_ssl_recv(int index, char * pdata, int size);
 
