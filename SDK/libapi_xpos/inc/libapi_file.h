@@ -175,7 +175,17 @@ Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT int UFile_Clear(cchar *FileName, int iFileLocation);
 
-
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:yangjy
+Functions:File system remaining space£¨UFile_GetFreeSpace£©
+Input : drive£º0
+Output : Nothing
+return: Success£ºReturn to the remaining space unit K
+		UFILE_FAIL			= -1,              //Fail
+Remarks: 
+*************************************************************************************/
+LIB_EXPORT long UFile_GetFreeSpace(cchar *drive);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.

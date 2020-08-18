@@ -92,7 +92,7 @@ Input : 	type£º		Key type(0x00-0x04)
 			mode:		Operation type (encryption/decryption)
 			ind:		Raw data
 			size:		Data length (8-byte multiple)
-			des_mode:	Data padding
+			des_mode:	Data padding(DES_MODE_ECB/DES_MODE_CBC)
 Output :   outd:		Calculation results
 return: 0,     success
 		Other, failure	
@@ -130,7 +130,7 @@ Functions:Use the previously obtained key 3des operation
 Input : 	mode:		Operation type (encryption/decryption)
 			ind:		Raw data
 			size:		Data length (8-byte multiple)
-			des_mode:	Data padding
+			des_mode:	Data padding(DES_MODE_ECB/DES_MODE_CBC)
 			key_tpye:	DUKPT_DES_KEY_PIN/DUKPT_DES_KEY_MAC1/DUKPT_DES_KEY_MAC2/DUKPT_DES_KEY_DATA1/DUKPT_DES_KEY_DATA2
 Output :   outd:		Calculation results
 return: 0,     success
@@ -157,7 +157,6 @@ return: 0,     success
 		Other, failure
 *************************************************************************************/
 LIB_EXPORT int dukpt_load_key(int mode, int type, int gid, unsigned char* init_ksn, unsigned char* init_key, char * kvc);
-
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -303,4 +302,6 @@ return: firmware version
 *************************************************************************************/
 LIB_EXPORT char * sec_get_fw_ver();
 
+LIB_EXPORT int dukpt_get_ksn(unsigned char gid, unsigned char * ksn);
+LIB_EXPORT int dukpt_init_key(unsigned char gid, unsigned char* init_ksn, unsigned char* init_key);
 

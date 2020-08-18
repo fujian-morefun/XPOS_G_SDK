@@ -81,7 +81,7 @@ Output : Nothing
 return: USYS_PARAERROR = -2,   //Parameter Error
 		USYS_FAIL     = -1,  Fail
 		USYS_SUCCES   = 0，Success
-Remarks: API内部判断时间格式是否正确
+Remarks: Internal judgment of time format in API
 *************************************************************************************/
 LIB_EXPORT int Sys_SetDateTime(byte *DateTime);
 
@@ -237,12 +237,13 @@ LIB_EXPORT int Sys_scaner_open();
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lxz
 Functions:Start scanning
-Input : pfun
+Input : Nothing
 Output :
 return: USYS_SUCCESS        =  0	 	Success
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT int Sys_scaner_start();
+
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -268,17 +269,114 @@ Remarks: Nothing
 LIB_EXPORT int Sys_scaner_close();
 
 
+
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
-Author:linzhu
-Functions:Set app version
-Input : pszVer  the app version
-Output :
+Author:luoxizhu
+Functions:Setting Application Version Number
+Input : appvision Application Version Number
+Output : Nothing 
 return: USYS_SUCCESS        =  0	 	Success
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT int Sys_SetAppVer(char *pszVer);
 
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Initialization driver
+Input : Nothing
+Output : Nothing 
+return: none
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_driverlib_init();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Judging whether there is a secondary liquid crystal
+Input : Nothing
+Output : Nothing 
+return: Return 1 has a secondary liquid crystal
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT int  Sys_get_sublcd_probe();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Switching liquid crystal
+Input : index=0 Main liquid crystal  ,index =1 Paraliquid crystal
+Output : Nothing 
+return: Return 1 has a secondary liquid crystal
+Remarks: Nothing
+*************************************************************************************/
+
+LIB_EXPORT void Sys_lcd_set_index(int index);
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Brighten the backlight by pressing the key
+Input : Nothing
+Output : Nothing 
+return: Return 1 has a secondary liquid crystal
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void  Sys_power_key_set_light();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Get the shutdown time
+Input : Nothing
+Output : Nothing 
+return: Return shutdown time
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT  int Sys_lcd_PowerDownTime();
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Set the shutdown time
+Input : ntime  shutdown time
+Output : Nothing 
+return: 
+Remarks: Nothing
+*************************************************************************************/
+
+LIB_EXPORT  void Sys_lcd_SetPowerDownTime(int ntime);
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Get  Backlight time
+Input : Nothing
+Output : Nothing 
+return: Return Backlight time
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT  int Sys_lcd_BackLightTime();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions:Set Backlight time
+Input : ntime  Backlight time
+Output : Nothing 
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT  void Sys_lcd_SetBackLightTime(int ntime);
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:linzhu
@@ -289,5 +387,47 @@ return: the app version
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT const char * Sys_GetAppVer();
+
+
+LIB_EXPORT int Sys_TaskCreate( void *pfun , int prio, char * stk, int task_size );
+
+#define SYS_DEVICE_TYPE_H9G		18
+#define SYS_DEVICE_TYPE_M70G    20
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:yangjy
+Functions:Get Device Type
+Input : 
+Output :
+return: Device Type H9 or MP70
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT int Sys_GetDeviceType();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:Set TMS state
+Input : nBusyState:1 app busy, not deal TMS; 0 app not busy, can deal TMS
+Output :
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_tms_AppBusy(int nBusyState);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:run tms update task
+Input : 
+Output :
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_tms_update();
+
+#define SYS_TRACE( ...)	osl_log( "app", 2 , __VA_ARGS__ )
+#define SYS_TRACE_BUFF(buff,size,tip) 	osl_log_buff_tip("app",2,buff, size , tip ,1 );
+
 
 #endif /*__LIBAPI_SYSTEM_HEADER__*/

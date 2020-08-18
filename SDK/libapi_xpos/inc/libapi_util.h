@@ -131,6 +131,7 @@ Functions:2.2.5.12	 input method input (Util_InputMethod) supports data input fr
 Input : disp_line:     the number of rows displayed
 		msgPrompt:     prompt information (left justified)
 		input_line£º   number of rows displayed in input data
+					   (if input_lien >0 it only show 0ne line, if input_line <0,it can show multiple line begin at one line)
 		min:           minimum input length
 		max:           maximum input length
 		disp_pattern:  input data display position, 0 left alignment, 1 center; 2 right alignment
@@ -165,8 +166,28 @@ Remarks: When the input mode is numeric and alphabetic input, the switching betw
 		capitalized and lowercase letters is carried out by pressing a button continuously.
 *************************************************************************************/
 LIB_EXPORT int Util_InputText(int disp_line, char * msgPrompt, int input_line, char *str, int min, int max, int disp_pattern, byte disp_mode ,int timeout);
-
-
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:yangjy
+Functions:2.2.5.13	string input (Util_InputText) number, child, password input
+Input : disp_line:     the number of rows displayed
+		msgPrompt:     prompt information (left justified)
+		input_line£º   number of rows displayed in input data
+		min:           minimum input length
+		max:           maximum input length
+		disp_pattern:  input data display position, 0 left alignment, 1 center; 2 right alignment
+		disp_mode£º    input mode£º 1 digit, character input; 2 password input.	(press # to change digit to alphabet or character)
+		timeout:       waiting for input timeout time (seconds)
+		title:		   if title length is not zero ,show title on first line center 
+Output : str:          input data
+return: success: returns the str byte number of input data.
+		UUTIL_TIMEOUT  = -3,    // input timeout
+		UUTIL_CANCEL   = -2,    //input cancelled
+		UUTIL_FAIL           = -1,    Fail
+Remarks: When the input mode is numeric and alphabetic input, the switching between numeric,
+		capitalized and lowercase letters is carried out by pressing a button continuously.
+*************************************************************************************/
+LIB_EXPORT int Util_InputTextEx(int disp_line, char * msgPrompt, int input_line, char *str, int min, int max, int disp_pattern, byte disp_mode ,int timeout,char *title);
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:yangjy
@@ -281,5 +302,26 @@ Remarks:   Voice playback is non blocking.
 *************************************************************************************/
 LIB_EXPORT void Util_Led(int num, int type);
 
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions: Request memory
+Input : size memory size
+Output : Nothing
+return: Application Memory Pointer
+*************************************************************************************/
+LIB_EXPORT void * Util_Malloc(int size);
+
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:luoxizhu
+Functions: Release memory
+Input :A pointer to release memory
+Output : Nothing
+return: 
+*************************************************************************************/
+LIB_EXPORT void Util_Free( void * p);
 
 #endif /*__LIBAPI_UTIL_HEADER__*/
