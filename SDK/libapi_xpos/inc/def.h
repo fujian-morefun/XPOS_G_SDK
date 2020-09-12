@@ -410,7 +410,7 @@ typedef struct
 	int		HostPort[2];   /*Service port number*/
 	char	HostDns[50];   /*Server domain name*/
 }HOSTCONFIG;
-
+#if 0
 //Communication parameters initialize the joint structure (Ethernet, WIFI, GPRS, CDMA, MODEM)
 typedef struct
 {
@@ -425,7 +425,7 @@ int iCommMode;		/*Communication method, read the communication method in the mac
 	void ( *ShowFunc )( void ) ;			/*Interface information displayed when blocked*/
 	int   CycCount;							/*Cycles*/
 }COMMCONFIG;
-
+#endif
 //Establish a host connection communication parameter joint structure (Ethernet, WIFI, GPRS, CDMA, MODEM)
 typedef struct
 {

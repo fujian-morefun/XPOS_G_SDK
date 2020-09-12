@@ -67,7 +67,7 @@ Output : Apdu£ºSee ICCAPDU structure
 		The data returned depends on the type of OperType operation in the ICCAPDU structure and is placed in R_Data.
 return: UICC_COMMAND_FAIL    = -2,   // Communication error
 		UICC_FAIL        = -1,   // Fail
-		UICC_OK            =  0    // Success
+		Actual return length      >= 0    // Success
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT int Icc_ICComm (int iCardType,int iSlotType, ICCAPDU *Apdu);

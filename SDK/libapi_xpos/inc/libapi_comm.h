@@ -7,7 +7,7 @@ extern "C"{
 #endif
 
 typedef struct __st_wifi_ap_list{
-	int ecn;
+	int ecn;//Encryption method 0: OPEN 1: WEP 2: WPA_PSK 3: WPA2_PSK 4: WPA_WPA2_PSK
 	char ssid[64];//WiFi name
 	char utf8ssid[64];
 	int rssi;//Signal strength

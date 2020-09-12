@@ -15,6 +15,7 @@
 #define GUI_GUIPAINT				0x000A0001
 #define GUI_KEYPRESS				0x00050001
 #define GUI_SCAN_OK					0x000E0021
+#define GUI_USR_PROC				0x000EFF00
 
 #define GUI_KEY_0		'0'
 #define GUI_KEY_1		'1'
