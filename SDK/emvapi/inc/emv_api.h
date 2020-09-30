@@ -1,6 +1,7 @@
 #pragma once
 #include "pub/pub.h"
 #include "driver/mf_magtek.h"
+#include "libapi_xpos/inc/def.h"
 //reference to emv_interface.h
 
 
@@ -37,6 +38,16 @@ enum{
 	READ_CARD_MODE_MAG = 0x01,
 	READ_CARD_MODE_IC = 0x02,
 	READ_CARD_MODE_RF = 0x04
+};
+//emv_card_end : ret input
+enum{
+	EMVCARD_RET_QUIT,		//quit
+	EMVCARD_RET_INPUT,	
+	EMVCARD_RET_MAGTEK,		//ms card
+	EMVCARD_RET_ICC,		// ICC
+	EMVCARD_RET_RFID,		//RF
+	EMVCARD_RET_TIME_OVER ,	// timeouts
+	EMVCARD_RET_RFS,//    two or more RF card
 };
 
 typedef struct __st_read_card_in{
@@ -368,3 +379,5 @@ LIB_EXPORT int emvapi_check_rf();
 LIB_EXPORT int EMV_SetPinInputMsg(st_input_pin st_msg);
 
 LIB_EXPORT int EMV_SetReadCardShow(st_read_card_show st_msg);
+
+LIB_EXPORT void set_mag_track_info(struct card_magtek_track_info track_set_info);

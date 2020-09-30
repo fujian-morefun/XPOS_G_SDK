@@ -715,3 +715,9 @@ return:   1			Confirm return
 		  3			Timeout		
 *************************************************************************************/
 LIB_EXPORT int gui_messagebox_showEx(char *title, char *msg , char* pszLeftOp, char* pszRightOp , int timeover,int flag,unsigned char * keylist, int * presskey);
+
+LIB_EXPORT void gui_setTitle(char *title);
+LIB_EXPORT int gui_text_out_heghlight(int x, int y, int y2,char * text);
+
+LIB_EXPORT int gui_default_msg_func_add(void * pfunc);
+
