@@ -159,14 +159,26 @@ LIB_EXPORT void Sys_Delay(uint uiMs);
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:yangjy
-Functions: Real time display of battery power
-Input : isDisp£º 0- does not display, 1- display
+Functions: Real time of battery power
+Input : void
 Output : Nothing
-return: Successful  0-100 (100 indicates maximum).
+return: Successful  0-5 (5 indicates maximum).
 		USYS_FAIL           = -1,    Fail
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT int Sys_GetBatter(void);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions: charging state
+Input : void
+Output : Nothing
+return: 0			Charging with charger.
+		-1          
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT int Sys_Batter_Charge(void);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.

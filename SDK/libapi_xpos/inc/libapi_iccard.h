@@ -198,7 +198,7 @@ return: UICC_FAIL			= -1,   // Fail
 		UICC_OK            =  0    // Success
 Remarks: Nothing
 *************************************************************************************/
-LIB_EXPORT int card_MagStripeDetect(struct card_magtek_track_info *trackinfo);
+LIB_EXPORT int card_MagStripeDetect(card_magtek_track_info *trackinfo);
 
 LIB_EXPORT int mf_rfid_mfcl_open(void);
 LIB_EXPORT int mf_rfid_mfcl_close(void);

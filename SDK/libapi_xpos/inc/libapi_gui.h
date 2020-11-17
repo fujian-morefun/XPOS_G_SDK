@@ -639,7 +639,7 @@ Output: Nothing
 return: Nothing
 *************************************************************************************/
 LIB_EXPORT int gui_select_page_ex(char *title , char *items[],int itemscount,int timeover, int select);
-
+LIB_EXPORT int gui_select_page_ex_t(char *title ,char items[][255],int itemscount,int timeover, int select);
 
 
 /*************************************************************************************

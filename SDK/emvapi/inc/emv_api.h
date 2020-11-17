@@ -223,10 +223,37 @@ Attention:Don't need to call EMV_online_cardemv_free()
 *************************************************************************************/
 LIB_EXPORT int emv_onlineresp_proc_pack(int nOnlineRes,char *sResp39,char *sField55,char*emvtags, char*packvalue,int*packlen);
 
-
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:zhiyu
+Functions:pre-processing
+Input : card_in£ºThe parameter of EMV trans
+Output : 
+return: 
+     	SUCC	 0	
+		FAIL     <0	 
+*************************************************************************************/
 LIB_EXPORT int emv_card_begin(st_read_card_in *card_in);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:zhiyu
+Functions:loop to detect cards
+Input : card_mode:READ_CARD_MODE_MAG , READ_CARD_MODE_IC , READ_CARD_MODE_RF
+Output : 
+return: EMVCARD_RET_MAGTEK;EMVCARD_RET_ICC;EMVCARD_RET_RFID;EMVCARD_RET_QUIT
+*************************************************************************************/
 LIB_EXPORT int emv_card_loop( int card_mode );
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:zhiyu
+Functions:end of card reading, pack card data
+Input : ret:return value of emv_card_loop;
+		card_in£ºThe parameter of EMV trans
+Output : card_out£ºOut buffer of EMV trans
+return: Transaction Result return value:EMVAPI_RET_XX
+*************************************************************************************/
 LIB_EXPORT int emv_card_end( int ret, st_read_card_in *card_in,st_read_card_out *card_out);
+
 LIB_EXPORT void Emvapi_Version(char *pszVersion);
 LIB_EXPORT void EMV_iKernelInit(void);
 LIB_EXPORT void EMV_SetInputPin(int (*InputPin)(char *,char *,char ,char *));
@@ -380,4 +407,4 @@ LIB_EXPORT int EMV_SetPinInputMsg(st_input_pin st_msg);
 
 LIB_EXPORT int EMV_SetReadCardShow(st_read_card_show st_msg);
 
-LIB_EXPORT void set_mag_track_info(struct card_magtek_track_info track_set_info);
+LIB_EXPORT void set_mag_track_info(card_magtek_track_info track_set_info);

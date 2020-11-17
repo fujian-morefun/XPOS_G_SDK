@@ -1133,11 +1133,11 @@ unsigned char ucCoefficient[MAX_RSA_PRIME_LEN];		 //CRT Coefficient, prime and p
 #define MAGTEK_TRACK_2_MAX_CHARS		(140)
 #define MAGTEK_TRACK_3_MAX_CHARS		(140)
 
-struct card_magtek_track_info {
+typedef struct _card_magtek_track_info{
 	unsigned char track1[MAGTEK_TRACK_1_MAX_CHARS];
 	unsigned char track2[MAGTEK_TRACK_2_MAX_CHARS];
 	unsigned char track3[MAGTEK_TRACK_3_MAX_CHARS];
-};
+}card_magtek_track_info;
 
 
 #endif
