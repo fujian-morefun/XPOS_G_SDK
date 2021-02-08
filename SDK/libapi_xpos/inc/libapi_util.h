@@ -323,5 +323,15 @@ Output : Nothing
 return: 
 *************************************************************************************/
 LIB_EXPORT void Util_Free( void * p);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:yangjy
+Functions: Util_SHA1
+Input : psSrc:source buffer; nSrcLen:source length
+Output : psDst:result of SHA1
+return: 0 SUCC els fail
+Remarks:   
+*************************************************************************************/
+LIB_EXPORT int Util_SHA1(const byte *psSrc, uint nSrcLen, byte *psDst);
 
 #endif /*__LIBAPI_UTIL_HEADER__*/

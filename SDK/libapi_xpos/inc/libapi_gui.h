@@ -442,17 +442,16 @@ Output : Nothing
 return: 0 success
 *************************************************************************************/
 LIB_EXPORT int gui_main_menu_func_add(void * pfunc);
-
-
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx
-Functions:Add menu item
-Input : menu_item		Menu data
+Functions:def menu handler
+Input : pfunc		Menu handler
 Output : Nothing			
 return: 0 success
 *************************************************************************************/
-LIB_EXPORT int gui_main_menu_item_add(st_gui_menu_item_def * menu_item);
+
+LIB_EXPORT int gui_main_menu_func_del(void * pfunc);
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -684,7 +683,7 @@ return: 0			success
 *************************************************************************************/
 LIB_EXPORT void  gui_textout_line_center(char *pMsg , int top);
 
-
+LIB_EXPORT void  gui_textout_line_right(char *pMsg , int top);
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lxz
@@ -720,4 +719,23 @@ LIB_EXPORT void gui_setTitle(char *title);
 LIB_EXPORT int gui_text_out_heghlight(int x, int y, int y2,char * text);
 
 LIB_EXPORT int gui_default_msg_func_add(void * pfunc);
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:Add menu item
+Input : menu_item		Menu data
+Output : Nothing			
+return: 0 success
+*************************************************************************************/
+LIB_EXPORT int gui_main_menu_item_add(st_gui_menu_item_def * menu_item);
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lbx
+Functions:del menu item
+Input : name: the value of st_gui_menu_item_def->name id: the value of st_gui_menu_item_def->id
+Output : Nothing			
+return: 0 success
+*************************************************************************************/
+LIB_EXPORT int gui_main_menu_item_del(char *name ,char *id);
 

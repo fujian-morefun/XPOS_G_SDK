@@ -98,7 +98,7 @@ return: 0,     success
 		Other, failure	
 *************************************************************************************/
 LIB_EXPORT int mksk_3des_run_ex(int type, int gid, int mode, unsigned char *ind, int size, unsigned char *outd, int des_mode);
-
+LIB_EXPORT int mksk_3des_run_ex2(int type, int gid, int mode, unsigned char *ind, int size, unsigned char iv[8],unsigned char *outd, int des_mode);
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
 Author:lx

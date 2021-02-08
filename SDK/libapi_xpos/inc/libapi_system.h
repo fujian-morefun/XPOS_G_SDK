@@ -400,7 +400,19 @@ Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT const char * Sys_GetAppVer();
 
-
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:yangjy
+Functions: create system task
+Input : pfun:processing function of task
+		prio:task priority
+		stk:stack of task
+		task_size:stack size
+Output : Nothing
+return: 0 Successfully create
+		else FAIL    
+Remarks: Nothing
+*************************************************************************************/
 LIB_EXPORT int Sys_TaskCreate( void *pfun , int prio, char * stk, int task_size );
 
 #define SYS_DEVICE_TYPE_H9G		18
@@ -437,6 +449,27 @@ return:
 Remarks: Nothing
 *************************************************************************************/
 LIB_EXPORT void Sys_tms_update();
+
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:unpack /mf/app/data/mf.zip and upgrade, then reboot
+Input : 
+Output :
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_zip_update();
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:set device language
+Input :nLanguageType; 0,Chinese;1,English;2,Persian 
+Output :
+return: 
+Remarks: Nothing
+*************************************************************************************/
+LIB_EXPORT void Sys_set_language(int nLanguageType);
 
 #define SYS_TRACE( ...)	osl_log( "app", 2 , __VA_ARGS__ )
 #define SYS_TRACE_BUFF(buff,size,tip) 	osl_log_buff_tip("app",2,buff, size , tip ,1 );

@@ -4,6 +4,7 @@
 
 LIB_EXPORT const char * libapi_version();
 LIB_EXPORT const char * apppub_version();
+LIB_EXPORT const char * apppub2_version();
 LIB_EXPORT const char * atc_version();
 LIB_EXPORT const char * json_version();
 LIB_EXPORT const char * net_version();

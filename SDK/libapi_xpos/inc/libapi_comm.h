@@ -67,8 +67,8 @@ Author:lx
 Functions:create socket
 Input : index(0/1)
 Output : Nothing
-return: 0,     success
-		Other, failure	
+return: >=0 index created
+		<0, failure	
 *************************************************************************************/
 LIB_EXPORT int comm_sock_create(int index);
 
@@ -324,6 +324,15 @@ Output :
 return: wifi signal
 *************************************************************************************/
 LIB_EXPORT char * wifi_get_local_ip();
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:lx
+Functions:get wifi rssi
+Input : 
+Output : 
+return: wifi rssi
+*************************************************************************************/
+LIB_EXPORT int comm_wifi_get_rssi();
 
 /*************************************************************************************
 Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
@@ -396,7 +405,16 @@ return: iccid
 *************************************************************************************/
 LIB_EXPORT const char * comm_atc_iccid();
 
-
+/*************************************************************************************
+Copyright: Fujian MoreFun Electronic Technology Co., Ltd.
+Author:George
+Functions:get net model GPRS or Wifi 
+Input :void 
+Output : void
+return:	WIRELESS = 0,		
+		WIFI=1,							
+*************************************************************************************/
+LIB_EXPORT int comm_net_model();
 
 #ifdef __cplusplus
 }
